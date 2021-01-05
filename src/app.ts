@@ -16,8 +16,28 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 const db = process.env.DB || "";
-app.use(cors);
-app.options("*", cors);
+//options for cors midddleware
+const options: cors.CorsOptions = {
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "X-Access-Token",
+  ],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  origin: "https://mmm-jobportal-api.herokuapp.com",
+  preflightContinue: true,
+};
+
+//use cors middleware
+app.use(cors(options));
+
+//add your routes
+
+//enable pre-flight
+
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
     cb(null, "images");
