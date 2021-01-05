@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import multer, { FileFilterCallback } from "multer";
@@ -28,16 +28,20 @@ const options: cors.CorsOptions = {
   credentials: true,
   methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
   origin: "https://mmm-jobportal-api.herokuapp.com",
-  preflightContinue: true,
+  preflightContinue: false,
 };
 
 //use cors middleware
 app.use(cors(options));
 
-//add your routes
-
 //enable pre-flight
-
+app.options(
+  "*",
+  cors(options),
+  (_req: Request, _res: Response, next: NextFunction) => {
+    next();
+  }
+);
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
     cb(null, "images");
