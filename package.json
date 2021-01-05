@@ -1,0 +1,38 @@
+{
+  "name": "jobportal_api",
+  "version": "1.0.0",
+  "description": "This is jobportal api",
+  "main": "app.js",
+  "author": "Myo Maung",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon dist/app",
+    "start": "node dist/app",
+    "watch": "tsc -w",
+    "init": "tsc --init"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.8.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.2",
+    "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.9",
+    "@types/express-validator": "^3.0.0",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongoose": "^5.10.3",
+    "@types/multer": "^1.4.5",
+    "@types/uuid": "^8.3.0",
+    "@types/validator": "^13.1.1",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.1.3"
+  }
+}
