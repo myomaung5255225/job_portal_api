@@ -31,21 +31,18 @@ const options: cors.CorsOptions = {
   preflightContinue: false,
 };
 
-app.use(function (_req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
-  next();
-});
-
 //use cors middleware
 app.use(cors(options));
 
 //enable pre-flight
 app.options(
+  "*",
+  cors(options),
+  (_req: Request, _res: Response, next: NextFunction) => {
+    next();
+  }
+);
+app.use(
   "*",
   cors(options),
   (_req: Request, _res: Response, next: NextFunction) => {
