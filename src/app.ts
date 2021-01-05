@@ -11,19 +11,19 @@ import SpecificationRouter from "./routes/specification";
 import LocationRouter from "./routes/location";
 import JobRouter from "./routes/job";
 import ApplicantRouter from "./routes/applicant";
-
+import cors from "cors";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 const db = process.env.DB || "";
-
+app.use(cors);
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
     cb(null, "images");
   },
   filename: (_req, file, cb) => {
     cb(null, `${v4()}_${file.originalname}`);
-  }
+  },
 });
 
 const filter = (_req: Request, file: any, cb: FileFilterCallback) => {
@@ -46,7 +46,7 @@ mongoose
     useNewUrlParser: true,
     useFindAndModify: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
   .then(() => {
     app.listen(port, () => {
@@ -60,6 +60,6 @@ mongoose
     app.use("/api/v1/applicant", ApplicantRouter);
     app.use(error);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err.message);
   });
