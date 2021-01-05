@@ -27,7 +27,7 @@ const options: cors.CorsOptions = {
   ],
   credentials: true,
   methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-  origin: "*",
+  origin: "https://mmm-jobportal-api.herokuapp.com",
   preflightContinue: false,
 };
 
@@ -36,7 +36,7 @@ app.use(cors(options));
 
 //enable pre-flight
 app.options(
-  "*",
+  "https://mmm-jobportal-api.herokuapp.com",
   cors(options),
   (_req: Request, _res: Response, next: NextFunction) => {
     next();
