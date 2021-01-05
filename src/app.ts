@@ -17,6 +17,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 const db = process.env.DB || "";
 app.use(cors);
+app.options("*", cors);
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
     cb(null, "images");
