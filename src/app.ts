@@ -17,38 +17,9 @@ const app = express();
 const port = process.env.PORT || 4000;
 const db = process.env.DB || "";
 //options for cors midddleware
-const options: cors.CorsOptions = {
-  allowedHeaders: [
-    "Origin",
-    "X-Requested-With",
-    "Content-Type",
-    "Accept",
-    "X-Access-Token",
-  ],
-  credentials: true,
-  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-  origin: "https://mmm-jobportal-api.herokuapp.com",
-  preflightContinue: false,
-};
 
-//use cors middleware
-app.use(cors(options));
+app.use(cors());
 
-//enable pre-flight
-app.options(
-  "https://mmm-jobportal-api.herokuapp.com",
-  cors(options),
-  (_req: Request, _res: Response, next: NextFunction) => {
-    next();
-  }
-);
-app.use(
-  "*",
-  cors(options),
-  (_req: Request, _res: Response, next: NextFunction) => {
-    next();
-  }
-);
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
     cb(null, "images");

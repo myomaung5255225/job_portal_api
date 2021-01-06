@@ -20,13 +20,20 @@ dotenv_1.default.config();
 const app = express_1.default();
 const port = process.env.PORT || 4000;
 const db = process.env.DB || "";
+//options for cors midddleware
+app.use(function (_req, res, next) {
+    res.append("Access-Control-Allow-Origin", "*");
+    res.append("Access-Control-Allow-Methods", "*");
+    res.append("Access-Control-Allow-Headers", "*");
+    next();
+});
 const storage = multer_1.default.diskStorage({
     destination: (_req, _file, cb) => {
         cb(null, "images");
     },
     filename: (_req, file, cb) => {
         cb(null, `${uuid_1.v4()}_${file.originalname}`);
-    }
+    },
 });
 const filter = (_req, file, cb) => {
     if (file.mimetype === "image/jpg" || "image/png" || "image/jpeg") {
@@ -47,7 +54,7 @@ mongoose_1.default
     useNewUrlParser: true,
     useFindAndModify: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
 })
     .then(() => {
     app.listen(port, () => {
@@ -60,7 +67,7 @@ mongoose_1.default
     app.use("/api/v1/applicant", applicant_1.default);
     app.use(error_1.default);
 })
-    .catch(err => {
+    .catch((err) => {
     console.log(err.message);
 });
 //# sourceMappingURL=app.js.map
