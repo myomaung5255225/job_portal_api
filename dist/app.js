@@ -16,17 +16,13 @@ const specification_1 = __importDefault(require("./routes/specification"));
 const location_1 = __importDefault(require("./routes/location"));
 const job_1 = __importDefault(require("./routes/job"));
 const applicant_1 = __importDefault(require("./routes/applicant"));
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const app = express_1.default();
 const port = process.env.PORT || 4000;
 const db = process.env.DB || "";
 //options for cors midddleware
-app.use(function (_req, res, next) {
-    res.append("Access-Control-Allow-Origin", "*");
-    res.append("Access-Control-Allow-Methods", "*");
-    res.append("Access-Control-Allow-Headers", "*");
-    next();
-});
+app.use(cors_1.default());
 const storage = multer_1.default.diskStorage({
     destination: (_req, _file, cb) => {
         cb(null, "images");
